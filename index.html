@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>240411100007Rachelia</title>
+
+    <meta name="author" content="Codeconvey" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    
+    <header class="ScriptHeader">
+        <div class="rt-container">
+            <div class="col-rt-12">
+                <div class="rt-heading">
+                    <h1>Biodata Mahasiswa</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="student-profile py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent text-center">
+                  <img class="profile_img" src="Image/Foto Formal.jpg" alt="student dp">
+                  <h3>Rachelia Andini Tendean</h3>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0"><strong class="pr-1">NIM:</strong>240411100007</p>
+                  <p class="mb-0"><strong class="pr-1">Fakultas:</strong>Teknik</p>
+                  <p class="mb-0"><strong class="pr-1">Jurusan:</strong>Teknik Informatika</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                </div>
+                <div class="card-body pt-0">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th width="30%">Tempat, Tanggal Lahir</th>
+                      <td width="2%">:</td>
+                      <td>Bangkalan, 17 Mei 2007</td>
+                    </tr>
+                    <tr>
+                      <th width="30%">Alamat	</th>
+                      <td width="2%">:</td>
+                      <td>Bangkalan</td>
+                    </tr>
+                    <tr>
+                      <th width="30%">No.HP</th>
+                      <td width="2%">:</td>
+                      <td>0812-3581-9975</td>
+                    </tr>
+                    
+                  </table>
+                </div>
+              </div>
+                <div style="height: 26px"></div>
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Tentang Saya</h3>
+                </div>
+                <div class="card-body pt-0">
+                    <p>Hi, perkenalkan nama saya Rachelia Andini Tendean. Saya adalah mahasiswa Teknik Informatika di Universitas Trunojoyo Madura (UTM). Saya lahir di Bangkalan pada tanggal 17 Mei tahun 2007. Saat ini saya tinggal di Kamal bersama Orang tua saya. Jika kalian membutuhkan sesuatu dari saya, Anda bisa menghubungi 0812-3581-9975.</p>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+<div class="ScriptTop">
+    <div class="rt-container">
+        <div class="col-rt-4" id="float-right"></div>
+    </div>
+</div>
+
+
+<div>
+    <h3 style="color: white; text-align: center;">Biodata Angkatan</h3>
+</div>
+
+
+
+<section>
+    <div class="rt-container">
+        <div class="col-rt-12">
+            <div class="Scriptcontent">
+                <!-- Container untuk menampilkan data mahasiswa -->
+                <div id="student-profiles" class="row student-profile py-4"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+console.log("Fetching JSON data...");
+fetch('data/data.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Data fetched successfully:", data);
+        const profilesContainer = document.getElementById('student-profiles');
+        let profileHTML = '';
+
+        data.forEach(student => {
+            profileHTML += `
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-transparent text-center">
+                            <img class="profile_img" src="${student.fotoselfie}" alt="student dp">
+                            <h3>${student.nama}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0"><strong class="pr-1">NIM:</strong>${student.nim}</p>
+                            <p class="mb-0"><strong class="pr-1">Kelompok:</strong>${student.kelompok}</p>
+                            <p class="mb-0"><strong class="pr-1">Fakultas:</strong>Teknik</p>
+                            <p class="mb-0"><strong class="pr-1">Program Studi:</strong>Teknik Informatika</p>
+                            <p class="mb-0"><strong class="pr-1">Tempat, Tanggal Lahir:</strong>${student.ttl}</p>
+                            <p class="mb-0"><strong class="pr-1">Alamat:</strong>${student.alamat}</p>
+                            <p class="mb-0"><strong class="pr-1">No.HP:</strong>${student.no}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        profilesContainer.innerHTML = profileHTML;
+    })
+    .catch(error => console.error('Fetch error:', error));
+
+</script>
+
+</body>
+</html>
